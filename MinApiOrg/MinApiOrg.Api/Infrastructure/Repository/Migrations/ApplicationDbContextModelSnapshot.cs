@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MinApiOrg.Api.Infrastructure.Data;
+using MinApiOrg.Api.Infrastructure.Repository;
 
 #nullable disable
 
-namespace MinApiOrg.Api.Infrastructure.Data.Migrations
+namespace MinApiOrg.Api.Infrastructure.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

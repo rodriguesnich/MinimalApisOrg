@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MinApiOrg.Api.Domain.Entities;
-using MinApiOrg.Api.Infrastructure.Data;
+using MinApiOrg.Api.Infrastructure.Repository;
 
 namespace MinApiOrg.Api.Infrastructure.Repository;
 

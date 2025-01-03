@@ -1,7 +1,6 @@
 using MinApiOrg.Api.Application.UseCases;
-using MinApiOrg.Api.Endpoints;
+using MinApiOrg.Api.Presentation.Endpoints;
 using MinApiOrg.Api.Infrastructure.Repository;
-using MinApiOrg.Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,3 @@
-
 using MinApiOrg.Api.Domain.Entities;
 using MinApiOrg.Api.Infrastructure.Repository;
 

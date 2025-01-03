@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MinApiOrg.Api.Domain.Entities;
 
-namespace MinApiOrg.Api.Infrastructure.Data;
+namespace MinApiOrg.Api.Infrastructure.Repository;
 
 public class ApplicationDbContext : DbContext
 {

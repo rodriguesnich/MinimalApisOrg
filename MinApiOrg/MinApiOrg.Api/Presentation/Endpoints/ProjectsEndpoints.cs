@@ -1,8 +1,8 @@
 using MinApiOrg.Api.Application.UseCases;
-using MinApiOrg.Api.Domain.Models.Request;
-using MinApiOrg.Api.Domain.Models.Response;
+using MinApiOrg.Api.Presentation.Dtos.Request;
+using MinApiOrg.Api.Presentation.Dtos.Response;
 
-namespace MinApiOrg.Api.Endpoints;
+namespace MinApiOrg.Api.Presentation.Endpoints;
 
 public static class ProjectsEndpoints
 {
@@ -18,32 +18,8 @@ public static class ProjectsEndpoints
                     return Results.BadRequest("Project name cannot be empty.");
 
                 var project = createProjectUseCase.Execute(request.Name, request.StartDate, request.EndDate);
-                
+
                 return Results.Created($"/projects/{project.Id}", project);
-            }
-            catch (ArgumentException ex)
-            {
-                return Results.BadRequest(ex.Message);
-            }
-        });
-
-        projectGroup.MapPut("/{id}", async (Guid id, UpdateProjectRequest request, UpdateProjectUseCase updateProjectUseCase) =>
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(request.Name))
-                    return Results.BadRequest("Project name cannot be empty.");
-
-                var project = updateProjectUseCase.Execute(id, request.Name, request.StartDate, request.EndDate);
-                if (project == null) return Results.NotFound();
-
-                return Results.Ok(new ProjectResponse
-                {
-                    Id = project.Id,
-                    Name = project.Name,
-                    StartDate = project.StartDate,
-                    EndDate = project.EndDate
-                });
             }
             catch (ArgumentException ex)
             {
@@ -76,6 +52,30 @@ public static class ProjectsEndpoints
                 EndDate = project.EndDate
             });
         });
+
+        projectGroup.MapPut("/{id}", async (Guid id, UpdateProjectRequest request, UpdateProjectUseCase updateProjectUseCase) =>
+                {
+                    try
+                    {
+                        if (string.IsNullOrWhiteSpace(request.Name))
+                            return Results.BadRequest("Project name cannot be empty.");
+
+                        var project = updateProjectUseCase.Execute(id, request.Name, request.StartDate, request.EndDate);
+                        if (project == null) return Results.NotFound();
+
+                        return Results.Ok(new ProjectResponse
+                        {
+                            Id = project.Id,
+                            Name = project.Name,
+                            StartDate = project.StartDate,
+                            EndDate = project.EndDate
+                        });
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        return Results.BadRequest(ex.Message);
+                    }
+                });
 
         projectGroup.MapDelete("/{id}", async (Guid id, DeleteProjectUseCase deleteProjectUseCase) =>
         {

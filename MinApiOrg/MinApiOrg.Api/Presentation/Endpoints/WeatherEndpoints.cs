@@ -1,4 +1,4 @@
-namespace MinApiOrg.Api.Endpoints;
+namespace MinApiOrg.Api.Presentation.Endpoints;
 
 public static class WeatherEndpoints
 {

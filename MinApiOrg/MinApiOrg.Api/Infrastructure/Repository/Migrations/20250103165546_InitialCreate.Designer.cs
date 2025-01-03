@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MinApiOrg.Api.Infrastructure.Data;
+using MinApiOrg.Api.Infrastructure.Repository;
 
 #nullable disable
 
-namespace MinApiOrg.Api.Infrastructure.Data.Migrations
+namespace MinApiOrg.Api.Infrastructure.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250103153127_InitialCreate")]
+    [Migration("20250103165546_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -1,4 +1,4 @@
-namespace MinApiOrg.Api.Domain.Models.Response;
+namespace MinApiOrg.Api.Presentation.Dtos.Response;
 
 public class ProjectResponse
 {

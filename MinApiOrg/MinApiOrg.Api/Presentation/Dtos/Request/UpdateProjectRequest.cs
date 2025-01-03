@@ -1,4 +1,4 @@
-namespace MinApiOrg.Api.Domain.Models.Request;
+namespace MinApiOrg.Api.Presentation.Dtos.Request;
 
 public class UpdateProjectRequest
 {
