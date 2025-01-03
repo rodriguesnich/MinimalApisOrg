@@ -1,14 +1,12 @@
-
 namespace MinApiOrg.Api.Domain.Entities;
 
 public class Project
 {
-    public Guid Id { get; private set; }
-    public string Name { get; private set; }
-    public DateTime StartDate { get; private set; }
-    public DateTime? EndDate { get; private set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
 
-    // Constructor to initialize the project
     public Project(string name, DateTime startDate, DateTime? endDate = null)
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -20,7 +18,6 @@ public class Project
         EndDate = endDate;
     }
 
-    // Method to set the end date
     public void Complete(DateTime endDate)
     {
         EndDate = endDate;

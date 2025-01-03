@@ -1,6 +1,6 @@
-
 using MinApiOrg.Api.Application.UseCases;
 using MinApiOrg.Api.Domain.Models.Request;
+using MinApiOrg.Api.Domain.Models.Response;
 
 namespace MinApiOrg.Api.Endpoints;
 
@@ -26,7 +26,57 @@ public static class ProjectsEndpoints
                 return Results.BadRequest(ex.Message);
             }
         });
- 
+
+        projectGroup.MapPut("/{id}", async (Guid id, UpdateProjectRequest request, UpdateProjectUseCase updateProjectUseCase) =>
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(request.Name))
+                    return Results.BadRequest("Project name cannot be empty.");
+
+                var project = updateProjectUseCase.Execute(id, request.Name, request.StartDate, request.EndDate);
+                if (project == null) return Results.NotFound();
+
+                return Results.Ok(new ProjectResponse
+                {
+                    Id = project.Id,
+                    Name = project.Name,
+                    StartDate = project.StartDate,
+                    EndDate = project.EndDate
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+        });
+
+        projectGroup.MapGet("/", async (ListProjectUseCase listProjectUseCase) =>
+        {
+            var projects = listProjectUseCase.Execute();
+            return Results.Ok(projects.Select(p => new ProjectResponse
+            {
+                Id = p.Id,
+                Name = p.Name,
+                StartDate = p.StartDate,
+                EndDate = p.EndDate
+            }));
+        });
+
+        projectGroup.MapGet("/{id}", async (Guid id, GetProjectUseCase getProjectUseCase) =>
+        {
+            var project = getProjectUseCase.Execute(id);
+            if (project == null) return Results.NotFound();
+
+            return Results.Ok(new ProjectResponse
+            {
+                Id = project.Id,
+                Name = project.Name,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate
+            });
+        });
+
         projectGroup.MapDelete("/{id}", async (Guid id, DeleteProjectUseCase deleteProjectUseCase) =>
         {
             var success = deleteProjectUseCase.Execute(id);
